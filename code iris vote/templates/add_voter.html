@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Add Voters</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/favicon.png" rel="icon">
+  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Serenity - v4.6.0
+  * Template URL: https://bootstrapmade.com/serenity-bootstrap-corporate-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+ 
+      
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+    
+      <h1 class="col-lg-8"><a href="index.html"> <span>Add Voters</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+
+		<nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{{ url_for('admin')}}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('add_voter')}}">Add Voters</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_voter')}}">View Voters</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+
+      
+
+    </div>
+  </header><!-- End Header -->
+
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="fade-up">
+     <h1>Iris Authentication for Secure Voting System</h1> 
+    </div>
+  </section><!-- End Hero -->
+
+
+  <main id="main">
+  </main><br><br><br><br><br><br>
+
+
+
+    <!-- ======= Signup Section ======= -->
+    <section id="signup" class="signup">
+      <div class="container">
+        <div class="section-title">
+          <h2>Add Voters</h2>
+        </div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+<form id="signup-form" class="signup-form" method="post" action="/add_voter" onsubmit="return checkForm()" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" class="form-control" required oninput="validateName()">
+        <div id="nameError" style="display: none; color: red;">Name must be at least 3 characters long</div>
+    </div><br>    
+    <div class="form-group">
+        <label for="aadhar_number">Aadhar Number</label>
+        <input type="text" id="aadhar_number" name="aadhar_number" class="form-control" required oninput="validateAadhar()">
+        <div id="aadharError" style="display: none; color: red;">Aadhar number must contain exactly 12 digits</div>
+    </div><br>
+    <div class="form-group">
+        <label for="file">Select Iris:</label>
+        <input type="file" id="file" name="file" class="form-control" required onchange="checkFile()">
+        <div id="fileError" style="display: none; color: red;">Please select a file</div>
+    </div><br>
+    <input type="submit" value="Login" id="submitButton" disabled><br><br>
+</form>
+    </div>
+</div>
+
+ 
+    </section><!-- End Signup Section -->
+	
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+<script>
+    function validateName() {
+        var nameInput = document.getElementById('name');
+        var nameError = document.getElementById('nameError');
+
+        if (nameInput.value.length < 3) {
+            nameError.style.display = 'block';
+        } else {
+            nameError.style.display = 'none';
+        }
+        checkForm();
+    }
+
+    function validateAadhar() {
+        var aadharInput = document.getElementById('aadhar_number');
+        var aadharError = document.getElementById('aadharError');
+
+        if (aadharInput.value.length !== 12 || isNaN(aadharInput.value)) {
+            aadharError.style.display = 'block';
+        } else {
+            aadharError.style.display = 'none';
+        }
+        checkForm();
+    }
+
+    function checkFile() {
+        var fileInput = document.getElementById('file');
+        var fileError = document.getElementById('fileError');
+
+        if (!fileInput.files || fileInput.files.length === 0) {
+            fileError.style.display = 'block';
+        } else {
+            fileError.style.display = 'none';
+        }
+        checkForm();
+    }
+
+    function checkForm() {
+        var nameInput = document.getElementById('name');
+        var aadharInput = document.getElementById('aadhar_number');
+        var fileInput = document.getElementById('file');
+        var submitButton = document.getElementById('submitButton');
+
+        if (nameInput.value.length >= 3 && aadharInput.value.length === 12 && fileInput.files && fileInput.files.length > 0) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+</script>
+
+{% if error %}
+    <script>
+        // Show an alert popup with the error message
+        window.onload = function() {
+            alert("{{ error }}");
+        };
+    </script>
+{% endif %}
+
+
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/vendor/php-email-form/validate.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/js/main.js"></script>
+
+</body>
+
+</html>
+
+

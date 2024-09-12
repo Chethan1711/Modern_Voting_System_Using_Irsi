@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Results</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/favicon.png" rel="icon">
+  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+
+    <style>
+        /* Styling for the voter card */
+        .voter-cards-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as needed */
+            gap: 20px; /* Adjust the gap between cards as needed */
+        }
+              
+        .voter-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 300px;
+        }
+    </style>
+	
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+       
+
+      
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+    
+      <h1 class="col-lg-8"><a href="index.html"> <span>Results</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{{ url_for('admin')}}">Home</a></li>
+        <li><a class="nav-link scrollto" href="{{ url_for('add_voter')}}">Manage Voters</a></li>
+        <li><a class="nav-link scrollto" href="{{ url_for('add_candidate')}}">Manage Candidates</a></li>
+        <li><a class="nav-link scrollto" href="{{ url_for('add_party')}}">Manage Partys</a></li>
+        <li><a class="nav-link scrollto" href="{{ url_for('results')}}">View Results</a></li>
+		<li><a class="nav-link scrollto" href="{{ url_for('logout')}}">Logout</a></li>			
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      
+
+    </div>
+  </header><!-- End Header -->
+
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="fade-up">
+     <h1>Iris Authentication for Secure Voting System</h1> 
+    </div>
+  </section><!-- End Hero -->
+
+
+  <main id="main">
+  </main><br><br><br><br><br><br>
+
+
+
+    <!-- ======= Signup Section ======= -->
+    <section id="signup" class="signup">
+      <div class="container">
+        <div class="section-title">
+          <h2>Results</h2>
+        </div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+<div class="container"> 	
+    <div class="voter-cards-container">
+        {% for candidate in candidate_votes %}
+        <div class="voter-card">
+            <div class="card-body">
+                <h1 class="card-title">{{ candidate[1] }}</h1>
+                <h2 class="card-text">Party: {{ candidate[2] }}</h2> <!-- Adjusted heading level -->
+                <h2 class="card-text">Votes: {{ candidate[4] }}</h2> <!-- Adjusted heading level -->
+            </div>
+            <img src="{{ candidate[3] }}" style="max-width: 100%; height: auto;" alt="Party Logo"> <!-- Fixed style attribute -->
+        </div>
+        {% endfor %}
+    </div><br>
+<form action="/clear_results" method="POST" onsubmit="return confirmClear()">
+            <input type="hidden" name="confirmation" id="confirmation" value="false">
+            <button type="submit">Clear Results</button>
+        </form>
+</div>
+    </div>
+</div>
+
+
+ 
+    </section><!-- End Signup Section -->
+	
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+<script>
+        function confirmClear() {
+            return confirm("Are you sure you want to clear results?");
+        }
+    </script>
+
+{% if error %}
+    <script>
+        // Show an alert popup with the error message
+        window.onload = function() {
+            alert("{{ error }}");
+        };
+    </script>
+{% endif %}
+
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/vendor/php-email-form/validate.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/js/main.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
